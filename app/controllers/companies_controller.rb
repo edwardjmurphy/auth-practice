@@ -1,9 +1,10 @@
 class CompaniesController < ApplicationController
 
-  def index
-    @companies = Company.all
-  end
-
+    def index
+      @companies = Company.all
+      @current_user = User.find_by({ "id" => session["user_id"] })
+    end
+    
   def show
     @company = Company.find_by({ "id" => params["id"] })
     @contacts = Contact.where({ "company_id" => @company["id"] })
